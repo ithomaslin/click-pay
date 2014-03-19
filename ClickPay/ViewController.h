@@ -2,12 +2,23 @@
 //  ViewController.h
 //  ClickPay
 //
-//  Created by Thomas Lin on 3/15/14.
+//  Created by Thomas Lin on 3/16/14.
 //  Copyright (c) 2014 AppCanvas. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
+#import "MenuViewController.h"
+#import "MainPageContentViewController.h"
 
 @interface ViewController : UIViewController
+<UIViewControllerTransitioningDelegate, UINavigationControllerDelegate, UIPageViewControllerDataSource,
+menuDelegate>
+@property (strong, nonatomic) UIPageViewController *pageViewController;
+@property (strong, nonatomic) NSArray *pageImages;
+@property (strong, nonatomic) NSArray *pageTitles;
+@property (strong, nonatomic) NSArray *pageSubtitles;
+
+@property (strong, nonatomic) IBOutlet UIButton *menuButton;
+@property (strong, nonatomic) IBOutlet UIButton *addTableButton;
 
 @end
