@@ -1,19 +1,19 @@
 //
-//  InfoViewController.m
+//  ActivationViewController.m
 //  ClickPay
 //
-//  Created by Thomas Lin on 3/19/14.
+//  Created by Thomas Lin on 3/23/14.
 //  Copyright (c) 2014 AppCanvas. All rights reserved.
 //
 
-#import "InfoViewController.h"
-#import "Application.h"
+#import "ActivationViewController.h"
+#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
-@interface InfoViewController ()
+@interface ActivationViewController ()
 
 @end
 
-@implementation InfoViewController
+@implementation ActivationViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -28,15 +28,9 @@
 {
     [super viewDidLoad];
     
-    UIButton *closeButton = [[UIButton alloc] initWithFrame:CGRectMake(260, 40, 24, 24)];
-    [closeButton setBackgroundImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
-    [closeButton addTarget:self action:@selector(closeInfoPage:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:closeButton];
-    self.versionLabel.text = [NSString stringWithFormat:@"Version: %@", [Application versionBuild]];
-}
-
-- (void)closeInfoPage:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.bottomView setBackgroundColor:UIColorFromRGB(0x0F8F8F8)];
+    [self.activeButton setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"button-green"]]];
+    self.activeButton.tintColor = [UIColor whiteColor];
 }
 
 - (void)didReceiveMemoryWarning

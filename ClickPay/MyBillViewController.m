@@ -1,19 +1,18 @@
 //
-//  InfoViewController.m
+//  MyBillViewController.m
 //  ClickPay
 //
-//  Created by Thomas Lin on 3/19/14.
+//  Created by Thomas Lin on 3/24/14.
 //  Copyright (c) 2014 AppCanvas. All rights reserved.
 //
 
-#import "InfoViewController.h"
-#import "Application.h"
+#import "MyBillViewController.h"
 
-@interface InfoViewController ()
+@interface MyBillViewController ()
 
 @end
 
-@implementation InfoViewController
+@implementation MyBillViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -28,14 +27,11 @@
 {
     [super viewDidLoad];
     
-    UIButton *closeButton = [[UIButton alloc] initWithFrame:CGRectMake(260, 40, 24, 24)];
-    [closeButton setBackgroundImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
-    [closeButton addTarget:self action:@selector(closeInfoPage:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:closeButton];
-    self.versionLabel.text = [NSString stringWithFormat:@"Version: %@", [Application versionBuild]];
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(closeCurrentView)];
+    self.navigationItem.leftBarButtonItem = cancelButton;
 }
 
-- (void)closeInfoPage:(id)sender {
+- (void)closeCurrentView {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

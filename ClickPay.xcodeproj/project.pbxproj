@@ -14,17 +14,25 @@
 		C432D46718D6164200D3763F /* HelveticaNeueLTStd-Bd.otf in Resources */ = {isa = PBXBuildFile; fileRef = C432D46618D6164200D3763F /* HelveticaNeueLTStd-Bd.otf */; };
 		C432D46A18D620F900D3763F /* MainPageContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C432D46918D620F900D3763F /* MainPageContentViewController.m */; };
 		C432D47218D6B75800D3763F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C432D47118D6B75800D3763F /* QuartzCore.framework */; };
+		C433A55B18E01A0D00CFBA92 /* ScanningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C433A55A18E01A0D00CFBA92 /* ScanningViewController.m */; };
+		C433A55C18E0257A00CFBA92 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C46211A118E00E790040BAFC /* AVFoundation.framework */; };
+		C433A55F18E0546B00CFBA92 /* MyBillViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C433A55E18E0546B00CFBA92 /* MyBillViewController.m */; };
+		C462115018DDA26F0040BAFC /* ContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C462114F18DDA26F0040BAFC /* ContainerViewController.m */; };
+		C462115418DE7BF70040BAFC /* ActivationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C462115318DE7BF70040BAFC /* ActivationViewController.m */; };
+		C462115718DF1E360040BAFC /* CredentialStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C462115618DF1E360040BAFC /* CredentialStore.m */; };
+		C462115A18DFE23C0040BAFC /* AuthAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C462115918DFE23C0040BAFC /* AuthAPIClient.m */; };
+		C462116418DFF8E60040BAFC /* Application.m in Sources */ = {isa = PBXBuildFile; fileRef = C462116318DFF8E60040BAFC /* Application.m */; };
 		C46EF29418D952F7007B0CEB /* DC.plist in Resources */ = {isa = PBXBuildFile; fileRef = C46EF29318D952F7007B0CEB /* DC.plist */; };
 		C46EF29618D9588A007B0CEB /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C46EF29518D9588A007B0CEB /* CoreTelephony.framework */; };
 		C46EF29818D958A3007B0CEB /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C46EF29718D958A3007B0CEB /* Accelerate.framework */; };
 		C46EF29A18D958E2007B0CEB /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C46EF29918D958E2007B0CEB /* Social.framework */; };
 		C46EF29C18D958F4007B0CEB /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C46EF29B18D958F4007B0CEB /* Twitter.framework */; };
-		C46EF29F18D9855A007B0CEB /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = C46EF29E18D9855A007B0CEB /* UIImage+ImageEffects.m */; };
 		C46EF2A218D9AD00007B0CEB /* CDPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46EF2A118D9AD00007B0CEB /* CDPickerViewController.m */; };
 		C46EF2A718D9E349007B0CEB /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46EF2A618D9E349007B0CEB /* InfoViewController.m */; };
 		C4955D4318D75FC600738AB1 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4955D4218D75FC600738AB1 /* SignUpViewController.m */; };
 		C4CEC9C318D7343C00C07E34 /* AddCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CEC9C218D7343C00C07E34 /* AddCardViewController.m */; };
 		C4CEC9CD18D74A0200C07E34 /* WalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CEC9CC18D74A0200C07E34 /* WalletViewController.m */; };
+		C4D71F4118DB6DD8000DB3C0 /* SigninViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4D71F4018DB6DD8000DB3C0 /* SigninViewController.m */; };
 		C4DA5FA918D49C5600C4C5BD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4DA5FA818D49C5600C4C5BD /* Foundation.framework */; };
 		C4DA5FAB18D49C5600C4C5BD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4DA5FAA18D49C5600C4C5BD /* CoreGraphics.framework */; };
 		C4DA5FAD18D49C5600C4C5BD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4DA5FAC18D49C5600C4C5BD /* UIKit.framework */; };
@@ -68,13 +76,42 @@
 		C432D46818D620F900D3763F /* MainPageContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPageContentViewController.h; sourceTree = "<group>"; };
 		C432D46918D620F900D3763F /* MainPageContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPageContentViewController.m; sourceTree = "<group>"; };
 		C432D47118D6B75800D3763F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		C433A55918E01A0D00CFBA92 /* ScanningViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanningViewController.h; sourceTree = "<group>"; };
+		C433A55A18E01A0D00CFBA92 /* ScanningViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanningViewController.m; sourceTree = "<group>"; };
+		C433A55D18E0546B00CFBA92 /* MyBillViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyBillViewController.h; sourceTree = "<group>"; };
+		C433A55E18E0546B00CFBA92 /* MyBillViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyBillViewController.m; sourceTree = "<group>"; };
+		C462114E18DDA26F0040BAFC /* ContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContainerViewController.h; sourceTree = "<group>"; };
+		C462114F18DDA26F0040BAFC /* ContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContainerViewController.m; sourceTree = "<group>"; };
+		C462115218DE7BF70040BAFC /* ActivationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivationViewController.h; sourceTree = "<group>"; };
+		C462115318DE7BF70040BAFC /* ActivationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivationViewController.m; sourceTree = "<group>"; };
+		C462115518DF1E360040BAFC /* CredentialStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CredentialStore.h; sourceTree = "<group>"; };
+		C462115618DF1E360040BAFC /* CredentialStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CredentialStore.m; sourceTree = "<group>"; };
+		C462115818DFE23C0040BAFC /* AuthAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthAPIClient.h; sourceTree = "<group>"; };
+		C462115918DFE23C0040BAFC /* AuthAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthAPIClient.m; sourceTree = "<group>"; };
+		C462116218DFF8E60040BAFC /* Application.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Application.h; sourceTree = "<group>"; };
+		C462116318DFF8E60040BAFC /* Application.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Application.m; sourceTree = "<group>"; };
+		C462119718E00E1D0040BAFC /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		C462119918E00E2C0040BAFC /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		C462119B18E00E560040BAFC /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		C462119D18E00E610040BAFC /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		C462119F18E00E6E0040BAFC /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
+		C46211A118E00E790040BAFC /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		C46211A318E00E840040BAFC /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		C46211A518E00E910040BAFC /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		C46211A718E00E9B0040BAFC /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		C46211A918E00EA20040BAFC /* libPods-AFNetworking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-AFNetworking.a"; path = "Pods/build/Debug-iphoneos/libPods-AFNetworking.a"; sourceTree = "<group>"; };
+		C46211AA18E00EA20040BAFC /* libPods-BlurryModalSegue.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-BlurryModalSegue.a"; path = "Pods/build/Debug-iphoneos/libPods-BlurryModalSegue.a"; sourceTree = "<group>"; };
+		C46211AB18E00EA20040BAFC /* libPods-MZAppearance.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-MZAppearance.a"; path = "Pods/build/Debug-iphoneos/libPods-MZAppearance.a"; sourceTree = "<group>"; };
+		C46211AC18E00EA20040BAFC /* libPods-SSKeychain.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-SSKeychain.a"; path = "Pods/build/Debug-iphoneos/libPods-SSKeychain.a"; sourceTree = "<group>"; };
+		C46211AD18E00EA20040BAFC /* libPods-SVProgressHUD.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-SVProgressHUD.a"; path = "Pods/build/Debug-iphoneos/libPods-SVProgressHUD.a"; sourceTree = "<group>"; };
+		C46211AE18E00EA20040BAFC /* libPods-UIImage+BlurredFrame.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-UIImage+BlurredFrame.a"; path = "Pods/build/Debug-iphoneos/libPods-UIImage+BlurredFrame.a"; sourceTree = "<group>"; };
+		C46B532A18E012C000DE075E /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
+		C46B532D18E013CD00DE075E /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		C46EF29318D952F7007B0CEB /* DC.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DC.plist; sourceTree = "<group>"; };
 		C46EF29518D9588A007B0CEB /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		C46EF29718D958A3007B0CEB /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		C46EF29918D958E2007B0CEB /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		C46EF29B18D958F4007B0CEB /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
-		C46EF29D18D9855A007B0CEB /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
-		C46EF29E18D9855A007B0CEB /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		C46EF2A018D9AD00007B0CEB /* CDPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDPickerViewController.h; sourceTree = "<group>"; };
 		C46EF2A118D9AD00007B0CEB /* CDPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDPickerViewController.m; sourceTree = "<group>"; };
 		C46EF2A518D9E349007B0CEB /* InfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoViewController.h; sourceTree = "<group>"; };
@@ -85,6 +122,8 @@
 		C4CEC9C218D7343C00C07E34 /* AddCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCardViewController.m; sourceTree = "<group>"; };
 		C4CEC9CB18D74A0200C07E34 /* WalletViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletViewController.h; sourceTree = "<group>"; };
 		C4CEC9CC18D74A0200C07E34 /* WalletViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletViewController.m; sourceTree = "<group>"; };
+		C4D71F3F18DB6DD8000DB3C0 /* SigninViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SigninViewController.h; sourceTree = "<group>"; };
+		C4D71F4018DB6DD8000DB3C0 /* SigninViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SigninViewController.m; sourceTree = "<group>"; };
 		C4DA5FA518D49C5600C4C5BD /* ClickPay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClickPay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4DA5FA818D49C5600C4C5BD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C4DA5FAA18D49C5600C4C5BD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -120,6 +159,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C433A55C18E0257A00CFBA92 /* AVFoundation.framework in Frameworks */,
 				C46EF29C18D958F4007B0CEB /* Twitter.framework in Frameworks */,
 				C46EF29A18D958E2007B0CEB /* Social.framework in Frameworks */,
 				C46EF29818D958A3007B0CEB /* Accelerate.framework in Frameworks */,
@@ -154,6 +194,57 @@
 			name = Fonts;
 			sourceTree = "<group>";
 		};
+		C462116518E0084B0040BAFC /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				C4955D4118D75FC600738AB1 /* SignUpViewController.h */,
+				C4955D4218D75FC600738AB1 /* SignUpViewController.m */,
+				C462115218DE7BF70040BAFC /* ActivationViewController.h */,
+				C462115318DE7BF70040BAFC /* ActivationViewController.m */,
+			);
+			name = SignUp;
+			sourceTree = "<group>";
+		};
+		C462116618E008620040BAFC /* SignIn */ = {
+			isa = PBXGroup;
+			children = (
+				C4D71F3F18DB6DD8000DB3C0 /* SigninViewController.h */,
+				C4D71F4018DB6DD8000DB3C0 /* SigninViewController.m */,
+			);
+			name = SignIn;
+			sourceTree = "<group>";
+		};
+		C462116718E008970040BAFC /* CountryCodePicker */ = {
+			isa = PBXGroup;
+			children = (
+				C46EF2A018D9AD00007B0CEB /* CDPickerViewController.h */,
+				C46EF2A118D9AD00007B0CEB /* CDPickerViewController.m */,
+			);
+			name = CountryCodePicker;
+			sourceTree = "<group>";
+		};
+		C462116818E008A40040BAFC /* Credential+AuthAPI */ = {
+			isa = PBXGroup;
+			children = (
+				C462115518DF1E360040BAFC /* CredentialStore.h */,
+				C462115618DF1E360040BAFC /* CredentialStore.m */,
+				C462115818DFE23C0040BAFC /* AuthAPIClient.h */,
+				C462115918DFE23C0040BAFC /* AuthAPIClient.m */,
+			);
+			name = "Credential+AuthAPI";
+			sourceTree = "<group>";
+		};
+		C462116918E008E30040BAFC /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				C4DA615D18D4B94000C4C5BD /* ViewController.h */,
+				C4DA615E18D4B94000C4C5BD /* ViewController.m */,
+				C432D46818D620F900D3763F /* MainPageContentViewController.h */,
+				C432D46918D620F900D3763F /* MainPageContentViewController.m */,
+			);
+			name = Main;
+			sourceTree = "<group>";
+		};
 		C4CEC9BD18D7315500C07E34 /* Account */ = {
 			isa = PBXGroup;
 			children = (
@@ -172,6 +263,30 @@
 				C4CEC9CC18D74A0200C07E34 /* WalletViewController.m */,
 			);
 			name = Wallet;
+			sourceTree = "<group>";
+		};
+		C4D71F4518DC6EED000DB3C0 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				C462114E18DDA26F0040BAFC /* ContainerViewController.h */,
+				C462114F18DDA26F0040BAFC /* ContainerViewController.m */,
+				C462116518E0084B0040BAFC /* SignUp */,
+				C462116618E008620040BAFC /* SignIn */,
+				C462116718E008970040BAFC /* CountryCodePicker */,
+				C462116818E008A40040BAFC /* Credential+AuthAPI */,
+			);
+			name = Authentication;
+			sourceTree = "<group>";
+		};
+		C4D71F4618DC6F0A000DB3C0 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				C4DA615918D4B89700C4C5BD /* MenuViewController.h */,
+				C4DA615A18D4B89700C4C5BD /* MenuViewController.m */,
+				C46EF2A518D9E349007B0CEB /* InfoViewController.h */,
+				C46EF2A618D9E349007B0CEB /* InfoViewController.m */,
+			);
+			name = Menu;
 			sourceTree = "<group>";
 		};
 		C4DA5F9C18D49C5600C4C5BD = {
@@ -197,6 +312,23 @@
 		C4DA5FA718D49C5600C4C5BD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C46B532D18E013CD00DE075E /* MessageUI.framework */,
+				C46B532A18E012C000DE075E /* libstdc++.dylib */,
+				C46211A918E00EA20040BAFC /* libPods-AFNetworking.a */,
+				C46211AA18E00EA20040BAFC /* libPods-BlurryModalSegue.a */,
+				C46211AB18E00EA20040BAFC /* libPods-MZAppearance.a */,
+				C46211AC18E00EA20040BAFC /* libPods-SSKeychain.a */,
+				C46211AD18E00EA20040BAFC /* libPods-SVProgressHUD.a */,
+				C46211AE18E00EA20040BAFC /* libPods-UIImage+BlurredFrame.a */,
+				C46211A718E00E9B0040BAFC /* SystemConfiguration.framework */,
+				C46211A518E00E910040BAFC /* CoreLocation.framework */,
+				C46211A318E00E840040BAFC /* CoreMedia.framework */,
+				C46211A118E00E790040BAFC /* AVFoundation.framework */,
+				C462119F18E00E6E0040BAFC /* libiconv.dylib */,
+				C462119D18E00E610040BAFC /* libc++.dylib */,
+				C462119B18E00E560040BAFC /* libz.dylib */,
+				C462119918E00E2C0040BAFC /* AudioToolbox.framework */,
+				C462119718E00E1D0040BAFC /* CoreVideo.framework */,
 				C46EF29B18D958F4007B0CEB /* Twitter.framework */,
 				C46EF29918D958E2007B0CEB /* Social.framework */,
 				C46EF29718D958A3007B0CEB /* Accelerate.framework */,
@@ -217,22 +349,17 @@
 				C4DA616218D4BC2A00C4C5BD /* TransitionControllers */,
 				C4DA5FB718D49C5600C4C5BD /* AppDelegate.h */,
 				C4DA5FB818D49C5600C4C5BD /* AppDelegate.m */,
-				C46EF29D18D9855A007B0CEB /* UIImage+ImageEffects.h */,
-				C46EF29E18D9855A007B0CEB /* UIImage+ImageEffects.m */,
+				C462116218DFF8E60040BAFC /* Application.h */,
+				C462116318DFF8E60040BAFC /* Application.m */,
 				C4DA5FBA18D49C5600C4C5BD /* Main.storyboard */,
 				C4DA5FC018D49C5600C4C5BD /* Images.xcassets */,
-				C4DA615D18D4B94000C4C5BD /* ViewController.h */,
-				C4DA615E18D4B94000C4C5BD /* ViewController.m */,
-				C432D46818D620F900D3763F /* MainPageContentViewController.h */,
-				C432D46918D620F900D3763F /* MainPageContentViewController.m */,
-				C4DA615918D4B89700C4C5BD /* MenuViewController.h */,
-				C4DA615A18D4B89700C4C5BD /* MenuViewController.m */,
-				C46EF2A518D9E349007B0CEB /* InfoViewController.h */,
-				C46EF2A618D9E349007B0CEB /* InfoViewController.m */,
-				C4955D4118D75FC600738AB1 /* SignUpViewController.h */,
-				C4955D4218D75FC600738AB1 /* SignUpViewController.m */,
-				C46EF2A018D9AD00007B0CEB /* CDPickerViewController.h */,
-				C46EF2A118D9AD00007B0CEB /* CDPickerViewController.m */,
+				C433A55918E01A0D00CFBA92 /* ScanningViewController.h */,
+				C433A55A18E01A0D00CFBA92 /* ScanningViewController.m */,
+				C433A55D18E0546B00CFBA92 /* MyBillViewController.h */,
+				C433A55E18E0546B00CFBA92 /* MyBillViewController.m */,
+				C462116918E008E30040BAFC /* Main */,
+				C4D71F4618DC6F0A000DB3C0 /* Menu */,
+				C4D71F4518DC6EED000DB3C0 /* Authentication */,
 				C4CEC9C718D73B0A00C07E34 /* Wallet */,
 				C4CEC9BD18D7315500C07E34 /* Account */,
 				C4DA5FAF18D49C5600C4C5BD /* Supporting Files */,
@@ -345,6 +472,7 @@
 			knownRegions = (
 				en,
 				Base,
+				de,
 			);
 			mainGroup = C4DA5F9C18D49C5600C4C5BD;
 			productRefGroup = C4DA5FA618D49C5600C4C5BD /* Products */;
@@ -420,20 +548,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C46EF29F18D9855A007B0CEB /* UIImage+ImageEffects.m in Sources */,
 				C4DA616818D4BC2A00C4C5BD /* DropAnimationController.m in Sources */,
 				C4955D4318D75FC600738AB1 /* SignUpViewController.m in Sources */,
 				C4DA615B18D4B89700C4C5BD /* MenuViewController.m in Sources */,
+				C433A55F18E0546B00CFBA92 /* MyBillViewController.m in Sources */,
 				C415056518D5D49A0042C2B4 /* AccountViewController.m in Sources */,
+				C462115718DF1E360040BAFC /* CredentialStore.m in Sources */,
+				C462115A18DFE23C0040BAFC /* AuthAPIClient.m in Sources */,
 				C4CEC9CD18D74A0200C07E34 /* WalletViewController.m in Sources */,
 				C4DA5FB918D49C5600C4C5BD /* AppDelegate.m in Sources */,
+				C462115418DE7BF70040BAFC /* ActivationViewController.m in Sources */,
+				C462116418DFF8E60040BAFC /* Application.m in Sources */,
 				C4CEC9C318D7343C00C07E34 /* AddCardViewController.m in Sources */,
+				C433A55B18E01A0D00CFBA92 /* ScanningViewController.m in Sources */,
 				C4DA615F18D4B94000C4C5BD /* ViewController.m in Sources */,
+				C4D71F4118DB6DD8000DB3C0 /* SigninViewController.m in Sources */,
 				C4DA5FB518D49C5600C4C5BD /* main.m in Sources */,
 				C46EF2A218D9AD00007B0CEB /* CDPickerViewController.m in Sources */,
 				C432D46A18D620F900D3763F /* MainPageContentViewController.m in Sources */,
 				C46EF2A718D9E349007B0CEB /* InfoViewController.m in Sources */,
 				C4DA616A18D4BC2A00C4C5BD /* ZoomAnimationController.m in Sources */,
+				C462115018DDA26F0040BAFC /* ContainerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

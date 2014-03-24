@@ -13,10 +13,13 @@
 @interface ViewController : UIViewController
 <UIViewControllerTransitioningDelegate, UINavigationControllerDelegate, UIPageViewControllerDataSource,
 menuDelegate>
+
 @property (strong, nonatomic) UIPageViewController *pageViewController;
 @property (strong, nonatomic) NSArray *pageImages;
 @property (strong, nonatomic) NSArray *pageTitles;
 @property (strong, nonatomic) NSArray *pageSubtitles;
+
+- (IBAction)addTablePressed:(id)sender;
 
 @property (strong, nonatomic) IBOutlet UIButton *menuButton;
 @property (strong, nonatomic) IBOutlet UIButton *addTableButton;

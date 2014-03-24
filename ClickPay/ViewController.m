@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 AppCanvas. All rights reserved.
 //
 
+#import "AppDelegate.h"
 #import "ViewController.h"
 #import "DropAnimationController.h"
 #import "ZoomAnimationController.h"
@@ -14,10 +15,18 @@
 #import "AccountViewController.h"
 #import "WalletViewController.h"
 #import "SignUpViewController.h"
+#import "AFNetworking.h"
+#import "ContainerViewController.h"
+#import "AuthAPIClient.h"
+#import "SVProgressHUD.h"
+#import "CredentialStore.h"
+#import "ScanningViewController.h"
 
 @interface ViewController ()
 
 @property (nonatomic, strong) id<ADVAnimationController> animationController;
+
+@property (nonatomic, strong) CredentialStore *credentialStore;
 
 @end
 
@@ -35,6 +44,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.credentialStore = [[CredentialStore alloc] init];
     
     // Create the data model
     _pageTitles = @[@"Welcome to clickpay", @"Step 1: Scan code", @"Step 2: View your bill", @"Step 3: Pay", @""];
@@ -69,9 +79,8 @@
     _addTableButton.titleLabel.font = fontCarda;
     [_addTableButton setTitleColor:color1 forState:UIControlStateNormal];
     [_addTableButton setBackgroundColor:color0];
+    
 }
-
-
 
 - (void)didReceiveMemoryWarning
 {
@@ -106,13 +115,11 @@
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
     SignUpViewController *signUpView = (SignUpViewController *)[storyboard instantiateViewControllerWithIdentifier:@"SignUpView"];
-    UINavigationController *signUpNav = [[UINavigationController alloc] initWithRootViewController:signUpView];
-    signUpNav.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     
     if ([identifier isEqualToString:@"account"]) {
         if (![[controller presentedViewController] isBeingDismissed]) {
             [controller dismissViewControllerAnimated:YES completion:^{
-                if (1) {
+                if (![self.credentialStore isLoggedIn]) {
                     [self willRequireDropAnimationWith:signUpView];
                 } else {
                     AccountViewController *accountView = (AccountViewController *)[storyboard instantiateViewControllerWithIdentifier:@"AccountView"];
@@ -123,8 +130,9 @@
     } else if ([identifier isEqualToString:@"wallet"]) {
         if (![[controller presentedViewController] isBeingDismissed]) {
             [controller dismissViewControllerAnimated:YES completion:^{
-                if (1) {
+                if (![self.credentialStore isLoggedIn]) {
                     [self willRequireDropAnimationWith:signUpView];
+                    
                 } else {
                     WalletViewController *walletView = (WalletViewController *)[storyboard instantiateViewControllerWithIdentifier:@"WalletView"];
                     [self.navigationController pushViewController:walletView animated:YES];
@@ -139,11 +147,15 @@
 }
 
 - (void)willRequireDropAnimationWith:(SignUpViewController *)controller {
+    ContainerViewController *containerVC = [[ContainerViewController alloc] initWithViewController:controller];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:containerVC];
+    containerVC.navigationItem.title = @"Sign Up";
+    
     self.animationController = [[DropAnimationController alloc] init];
-    UINavigationController *signUpNav = [[UINavigationController alloc] initWithRootViewController:controller];
-    signUpNav.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    signUpNav.transitioningDelegate = self;
-    [self presentViewController:signUpNav animated:YES completion:nil];
+    nav.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    nav.transitioningDelegate = self;
+    
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -206,4 +218,39 @@
     return 0;
 }
 
+- (IBAction)addTablePressed:(id)sender {
+    
+    if ([self.credentialStore isLoggedIn]) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+        SignUpViewController *signUpView = (SignUpViewController *)[storyboard instantiateViewControllerWithIdentifier:@"SignUpView"];
+        [self willRequireDropAnimationWith:signUpView];
+    } else {
+        [SVProgressHUD showWithStatus:@"Preparing your scanner..." maskType:SVProgressHUDMaskTypeGradient];
+        ScanningViewController *scanView = [[ScanningViewController alloc] init];
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:scanView];
+        [self presentViewController:nav animated:YES completion:^{
+            [SVProgressHUD dismiss];
+        }];
+    }
+    
+//    [SVProgressHUD show];
+//    [[AuthAPIClient sharedClient] GET:@"/"
+//                           parameters:nil
+//                              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//                                  [SVProgressHUD dismiss];
+//                                  NSLog(@"%@", responseObject);
+//                              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//                                  if (operation.response.statusCode == 500) {
+//                                      [SVProgressHUD showErrorWithStatus:@"Something went worng"];
+//                                  } else {
+//                                      NSData *jsonData = [operation.responseString dataUsingEncoding:NSUTF8StringEncoding];
+//                                      NSDictionary *json = [NSJSONSerialization JSONObjectWithData:jsonData
+//                                                                                           options:NSJSONReadingAllowFragments
+//                                                                                             error:&error];
+//                                      
+//                                      NSString *errorMessage = [json objectForKey:@"error"];
+//                                      [SVProgressHUD showErrorWithStatus:errorMessage];
+//                                  }
+//                              }];
+}
 @end

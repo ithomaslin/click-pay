@@ -53,7 +53,7 @@
 
 - (IBAction)creditCardCheck:(id)sender {
     
-    long cardNumber = [self.creditCardField.text longLongValue];
+    long cardNumber = [self.creditCardField.text integerValue];
     long digits = [self getLength:cardNumber];
     
     NSInteger digit[digits];

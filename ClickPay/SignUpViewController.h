@@ -10,14 +10,17 @@
 #import "CDPickerViewController.h"
 
 @interface SignUpViewController : UIViewController
-<CDPickerDelegate>
+<UIViewControllerTransitioningDelegate, CDPickerDelegate>
 
 - (IBAction)countryCodePicker:(id)sender;
-- (IBAction)modeSwitchPressed:(id)sender;
+- (IBAction)signUpButtonPressed:(id)sender;
+- (IBAction)switchModePressed:(id)sender;
 
 @property (strong, nonatomic) IBOutlet UITextField *phoneTextField;
 @property (strong, nonatomic) IBOutlet UIButton *countryCode;
 @property (strong, nonatomic) IBOutlet UILabel *countryCodeLabel;
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *modeSwitchButton;
+@property (strong, nonatomic) IBOutlet UIView *bottomView;
+@property (strong, nonatomic) IBOutlet UIButton *signupButton;
+@property (strong, nonatomic) IBOutlet UIButton *loginButton;
 
 @end

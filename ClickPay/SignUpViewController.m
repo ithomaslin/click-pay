@@ -6,14 +6,20 @@
 //  Copyright (c) 2014 AppCanvas. All rights reserved.
 //
 
-#import "SignUpViewController.h"
-#import "CDPickerViewController.h"
-
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import <CoreTelephony/CTCallCenter.h>
 #import <CoreTelephony/CTCall.h>
 #import <CoreTelephony/CTCarrier.h>
 #import <QuartzCore/QuartzCore.h>
+#import "SignUpViewController.h"
+#import "SigninViewController.h"
+#import "ContainerViewController.h"
+#import "ActivationViewController.h"
+#import "CDPickerViewController.h"
+#import "SVProgressHUD.h"
+#import "AuthAPIClient.h"
+
+#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 @interface SignUpViewController ()
 
@@ -40,10 +46,13 @@
 {
     [super viewDidLoad];
     
-    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                                                                  target:self
-                                                                                  action:@selector(cancelButtonPressed:)];
-    self.navigationItem.leftBarButtonItem = cancelButton;
+    [self.bottomView setBackgroundColor:UIColorFromRGB(0x0F8F8F8)];
+    self.signupButton.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"button-main"]];
+    self.signupButton.layer.cornerRadius = 5;
+    self.signupButton.tintColor = [UIColor whiteColor];
+    self.loginButton.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"button-green"]];
+    self.loginButton.layer.cornerRadius = 5;
+    self.loginButton.tintColor = [UIColor whiteColor];
     
     // Detecting user's default dialling code in current country
     {
@@ -73,8 +82,76 @@
     [self.searchResults addObjectsFromArray:results];
 }
 
-- (void)cancelButtonPressed:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+#pragma mark - Country code picker
+
+- (IBAction)countryCodePicker:(id)sender {
+    CDPickerViewController *cdPicker = (CDPickerViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"CDPickerView"];
+    cdPicker.cdDelegate = self;
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:cdPicker];
+    navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    [self presentViewController:navController animated:YES completion:nil];
+}
+
+#pragma mark - Sign up -
+
+- (IBAction)signUpButtonPressed:(id)sender {
+    
+    if ([self.phoneTextField.text isEqualToString:@""]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Oops!" message:@"Your phone number can't be empty" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+    } else {
+        [SVProgressHUD show];
+        
+        NSString *countryCode = [[NSString alloc] initWithFormat:@"%@", self.countryCodeLabel.text];
+        NSNumberFormatter *formatter = [NSNumberFormatter new];
+        formatter.numberStyle = NSNumberFormatterNoStyle;
+        NSNumber *number = [formatter numberFromString:[NSString stringWithFormat:@"%@", self.phoneTextField.text]];
+        NSString *phoneNumber = [countryCode stringByAppendingString:[NSString stringWithFormat:@"%@", [formatter stringFromNumber:number]]];
+        
+        NSDictionary *param = @{@"phone": [NSString stringWithFormat:@"%@", phoneNumber]};
+        
+        [[AuthAPIClient sharedClient] POST:@"/account/signup"
+                                parameters:param
+                                   success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                       NSString *message = [responseObject objectForKey:@"message"];
+                                       NSString *success = [responseObject objectForKey:@"success"];
+                                       
+                                       if ([success isEqualToString:@"YES"]) {
+                                           [SVProgressHUD dismiss];
+                                           UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+                                           ActivationViewController *activationView = (ActivationViewController *)[storyboard instantiateViewControllerWithIdentifier:@"ActivationView"];
+                                           activationView.activationCode = message;
+                                           [self.navigationController pushViewController:activationView animated:YES];
+                                       } else {
+                                           [SVProgressHUD dismiss];
+                                           [SVProgressHUD showErrorWithStatus:message];
+                                       }
+                                       
+                                   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                       if (operation.response.statusCode == 500) {
+                                           [SVProgressHUD showErrorWithStatus:@"Something went worng"];
+                                       } else {
+                                           NSData *jsonData = [operation.responseString dataUsingEncoding:NSUTF8StringEncoding];
+                                           NSDictionary *json = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                                                                options:NSJSONReadingAllowFragments
+                                                                                                  error:&error];
+                                           
+                                           NSString *errorMessage = [json objectForKey:@"error"];
+                                           [SVProgressHUD showErrorWithStatus:errorMessage];
+                                       }
+                                   }];
+    }
+    
+}
+
+- (IBAction)switchModePressed:(id)sender {
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    SigninViewController *signinView = (SigninViewController *)[storyboard instantiateViewControllerWithIdentifier:@"SignInView"];
+    ContainerViewController *containerController = (ContainerViewController *) self.parentViewController;
+    containerController.navigationItem.title = @"Sign In";
+    [containerController presentViewController:signinView];
+    
 }
 
 - (void)didselectWith:(CDPickerViewController *)controller withCode:(NSString *)code {
@@ -85,29 +162,7 @@
     }
 }
 
-- (IBAction)countryCodePicker:(id)sender {
-    CDPickerViewController *cdPicker = (CDPickerViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"CDPickerView"];
-    cdPicker.cdDelegate = self;
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:cdPicker];
-    navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    [self presentViewController:navController animated:YES completion:nil];
-}
-
-- (IBAction)modeSwitchPressed:(id)sender {
-    
-    [UIView animateWithDuration:1.0 animations:^{
-        
-    }];
-    
-    if ([self.navigationItem.title isEqualToString:@"Sign Up"]) {
-        self.navigationItem.title = @"Login";
-        _url = [NSURL URLWithString:@"/account/signin"];
-    } else {
-        self.navigationItem.title = @"Sign Up";
-        _url = [NSURL URLWithString:@"/account/signup"];
-    }
-    NSLog(@"%@", _url);
-}
+#pragma mark -
 
 - (void)didReceiveMemoryWarning
 {
@@ -115,15 +170,21 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO];
+}
+
  #pragma mark - Navigation
  
  // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
- {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+//    [super prepareForSegue:segue sender:sender];
+//    
+//    SigninViewController *signinView = segue.destinationViewController;
+//    
+//    signinView.transitioningDelegate = self;
+//    signinView.modalPresentationStyle
+//}
 
 @end

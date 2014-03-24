@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "MenuViewController.h"
 #import "BlurryModalSegue.h"
 
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
@@ -29,11 +28,11 @@
     
     [[BlurryModalSegue appearance] setBackingImageBlurRadius:@(7.5)];
     [[BlurryModalSegue appearance] setBackingImageSaturationDeltaFactor:@(.55)];
-    [[BlurryModalSegue appearance] setBackingImageTintColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:.5]];
+    [[BlurryModalSegue appearance] setBackingImageTintColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:.55]];
     
     return YES;
 }
-							
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

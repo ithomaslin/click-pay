@@ -4,12 +4,27 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Pods-AFNetworking.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-BlurryModalSegue.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>Pods-MZAppearance.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-SSKeychain.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-SVProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -27,22 +42,37 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>11DD9043D42A496C9683948A</key>
+		<key>02AF77F08CB0425B91DB79C9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>65D1EF89893D4B328E1C09EA</key>
+		<key>2F2F8722C015432BBF77EA36</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BDEDB0F337404D77AC76E655</key>
+		<key>2F6E2A90FA4640EC9A1173FF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CADFFA77F24045D8BCA23F47</key>
+		<key>8F1462BE160E41F4A3F3C94F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C869122D7B1D418E901169A5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CA6AF48ED9654447B894D1B1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FD6688E949D0411B8544E935</key>
 		<dict>
 			<key>primary</key>
 			<true/>
