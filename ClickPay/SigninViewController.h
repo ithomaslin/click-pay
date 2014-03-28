@@ -17,6 +17,7 @@
 @property (strong, nonatomic) IBOutlet UIView *bottomView;
 @property (strong, nonatomic) IBOutlet UIButton *signupButton;
 @property (strong, nonatomic) IBOutlet UIButton *signinButton;
+@property (strong, nonatomic) IBOutlet UIButton *forgotButton;
 
 
 - (IBAction)signinButtonPressed:(id)sender;

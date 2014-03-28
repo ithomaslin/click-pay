@@ -17,7 +17,7 @@
 #import "ActivationViewController.h"
 #import "CDPickerViewController.h"
 #import "SVProgressHUD.h"
-#import "AuthAPIClient.h"
+#import "AFNetworking.h"
 
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
@@ -96,6 +96,8 @@
 
 - (IBAction)signUpButtonPressed:(id)sender {
     
+    [self.phoneTextField resignFirstResponder];
+    
     if ([self.phoneTextField.text isEqualToString:@""]) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Oops!" message:@"Your phone number can't be empty" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
@@ -109,37 +111,48 @@
         NSString *phoneNumber = [countryCode stringByAppendingString:[NSString stringWithFormat:@"%@", [formatter stringFromNumber:number]]];
         
         NSDictionary *param = @{@"phone": [NSString stringWithFormat:@"%@", phoneNumber]};
+        NSLog(@"%@", phoneNumber);
         
-        [[AuthAPIClient sharedClient] POST:@"/account/signup"
-                                parameters:param
-                                   success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                       NSString *message = [responseObject objectForKey:@"message"];
-                                       NSString *success = [responseObject objectForKey:@"success"];
-                                       
-                                       if ([success isEqualToString:@"YES"]) {
-                                           [SVProgressHUD dismiss];
-                                           UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-                                           ActivationViewController *activationView = (ActivationViewController *)[storyboard instantiateViewControllerWithIdentifier:@"ActivationView"];
-                                           activationView.activationCode = message;
-                                           [self.navigationController pushViewController:activationView animated:YES];
-                                       } else {
-                                           [SVProgressHUD dismiss];
-                                           [SVProgressHUD showErrorWithStatus:message];
-                                       }
-                                       
-                                   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                       if (operation.response.statusCode == 500) {
-                                           [SVProgressHUD showErrorWithStatus:@"Something went worng"];
-                                       } else {
-                                           NSData *jsonData = [operation.responseString dataUsingEncoding:NSUTF8StringEncoding];
-                                           NSDictionary *json = [NSJSONSerialization JSONObjectWithData:jsonData
-                                                                                                options:NSJSONReadingAllowFragments
-                                                                                                  error:&error];
-                                           
-                                           NSString *errorMessage = [json objectForKey:@"error"];
-                                           [SVProgressHUD showErrorWithStatus:errorMessage];
-                                       }
-                                   }];
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        [manager POST:@"http://localhost:8000/account/signup"
+           parameters:param
+              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                  [SVProgressHUD dismiss];
+                  NSLog(@"%@", responseObject);
+                  
+                  NSString *message = [responseObject objectForKey:@"message"];
+                  NSString *success = [responseObject objectForKey:@"success"];
+                  
+                  if ([success isEqualToString:@"YES"]) {
+                      
+                      UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+                      ActivationViewController *activationView = (ActivationViewController *)[storyboard instantiateViewControllerWithIdentifier:@"ActivationView"];
+                      activationView.activationCode = message;
+                      activationView.phoneNumber = phoneNumber;
+                      [self.navigationController pushViewController:activationView animated:YES];
+                      
+                  } else {
+                      UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"OOPS!"
+                                                                          message:message
+                                                                         delegate:self
+                                                                cancelButtonTitle:@"OK"
+                                                                otherButtonTitles:nil, nil];
+                      [alertView show];
+                  }
+              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                  if (operation.response.statusCode == 500) {
+                      [SVProgressHUD showErrorWithStatus:@"Something went worng"];
+                  } else {
+                      NSData *jsonData = [operation.responseString dataUsingEncoding:NSUTF8StringEncoding];
+                      NSDictionary *json = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                                           options:NSJSONReadingAllowFragments
+                                                                             error:&error];
+                      
+                      NSString *errorMessage = [json objectForKey:@"error"];
+                      [SVProgressHUD showErrorWithStatus:errorMessage];
+                  }
+              }];
+        
     }
     
 }

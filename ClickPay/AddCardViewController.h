@@ -7,10 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "STPView.h"
 
-@interface AddCardViewController : UIViewController
+@interface AddCardViewController : UIViewController<STPViewDelegate>
+@property STPView* stripeView;
 
-@property (strong, nonatomic) IBOutlet UITextField *creditCardField;
-
-- (IBAction)creditCardCheck:(id)sender;
 @end

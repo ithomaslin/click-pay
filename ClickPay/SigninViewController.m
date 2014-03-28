@@ -45,12 +45,15 @@
     self.credentialStore = [[CredentialStore alloc] init];
     
     [self.bottomView setBackgroundColor:UIColorFromRGB(0x0F8F8F8)];
-    [self.signupButton setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"button-orange"]]];
+    [self.signupButton setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"button-green"]]];
     self.signupButton.layer.cornerRadius = 5;
     self.signupButton.tintColor = [UIColor whiteColor];
     [self.signinButton setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"button-main"]]];
     self.signinButton.layer.cornerRadius = 5;
     self.signinButton.tintColor = [UIColor whiteColor];
+    [self.forgotButton setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"button-orange"]]];
+    self.forgotButton.layer.cornerRadius = 5;
+    self.forgotButton.tintColor = [UIColor whiteColor];
     
     // Detecting user's default dialling code in current country
     {
@@ -97,6 +100,8 @@
 
 - (IBAction)signinButtonPressed:(id)sender {
     
+    [self.pinTextField resignFirstResponder];
+    
     [SVProgressHUD show];
     
     NSString *countryCode = [[NSString alloc] initWithFormat:@"%@", self.countryCodeLabel.text];
@@ -118,8 +123,9 @@
                                    NSString *authToken = [responseObject objectForKey:@"auth_token"];
                                    [self.credentialStore setAuthToken:authToken];
                                    NSLog(@"%@", authToken);
-                                   [SVProgressHUD dismiss];
-                                   [self dismissViewControllerAnimated:YES completion:nil];
+                                   [self dismissViewControllerAnimated:YES completion:^{
+                                       [SVProgressHUD dismiss];
+                                   }];
                                    
                                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                    if (operation.response.statusCode == 500) {

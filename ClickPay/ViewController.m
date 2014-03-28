@@ -21,6 +21,7 @@
 #import "SVProgressHUD.h"
 #import "CredentialStore.h"
 #import "ScanningViewController.h"
+#import "RESideMenu.h"
 
 @interface ViewController ()
 
@@ -73,7 +74,7 @@
     UIFont *fontCarda = [UIFont fontWithName:@"HelveticaNeueLTStd-Bd" size:30];
     
 	[self.navigationController setNavigationBarHidden:YES];
-    [_menuButton setImage:[UIImage imageNamed:@"menu-button.png"] forState:UIControlStateNormal];
+    [_menuButton setImage:[UIImage imageNamed:@"button-menu.png"] forState:UIControlStateNormal];
     [_menuButton addTarget:self action:@selector(showMenuViewController:) forControlEvents:UIControlEventTouchUpInside];
     
     _addTableButton.titleLabel.font = fontCarda;
@@ -220,7 +221,7 @@
 
 - (IBAction)addTablePressed:(id)sender {
     
-    if ([self.credentialStore isLoggedIn]) {
+    if (![self.credentialStore isLoggedIn]) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
         SignUpViewController *signUpView = (SignUpViewController *)[storyboard instantiateViewControllerWithIdentifier:@"SignUpView"];
         [self willRequireDropAnimationWith:signUpView];
@@ -232,25 +233,5 @@
             [SVProgressHUD dismiss];
         }];
     }
-    
-//    [SVProgressHUD show];
-//    [[AuthAPIClient sharedClient] GET:@"/"
-//                           parameters:nil
-//                              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//                                  [SVProgressHUD dismiss];
-//                                  NSLog(@"%@", responseObject);
-//                              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//                                  if (operation.response.statusCode == 500) {
-//                                      [SVProgressHUD showErrorWithStatus:@"Something went worng"];
-//                                  } else {
-//                                      NSData *jsonData = [operation.responseString dataUsingEncoding:NSUTF8StringEncoding];
-//                                      NSDictionary *json = [NSJSONSerialization JSONObjectWithData:jsonData
-//                                                                                           options:NSJSONReadingAllowFragments
-//                                                                                             error:&error];
-//                                      
-//                                      NSString *errorMessage = [json objectForKey:@"error"];
-//                                      [SVProgressHUD showErrorWithStatus:errorMessage];
-//                                  }
-//                              }];
 }
 @end

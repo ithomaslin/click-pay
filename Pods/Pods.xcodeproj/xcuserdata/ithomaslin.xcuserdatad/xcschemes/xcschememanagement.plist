@@ -19,12 +19,27 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-PaymentKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-RESideMenu.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-SSKeychain.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>Pods-SVProgressHUD.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-Stripe.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -42,37 +57,52 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>02AF77F08CB0425B91DB79C9</key>
+		<key>15047FCDBFB04BC7940C0402</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2F2F8722C015432BBF77EA36</key>
+		<key>286E23BDF9F542D5A893C7B0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2F6E2A90FA4640EC9A1173FF</key>
+		<key>472EA3C2ABFC4352BDD05AE0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8F1462BE160E41F4A3F3C94F</key>
+		<key>54426530341048ABBBC7DC60</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C869122D7B1D418E901169A5</key>
+		<key>700ED5262CFD4B6B8F3443CB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CA6AF48ED9654447B894D1B1</key>
+		<key>A1B955031D9E438CB9C56528</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FD6688E949D0411B8544E935</key>
+		<key>B35E9E8DBC484CA8AF278599</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B97DA2B7AC0948B198DD5E87</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E332013BB4B941808DC126D1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EC4C4AF3CA3C4A069957B5ED</key>
 		<dict>
 			<key>primary</key>
 			<true/>

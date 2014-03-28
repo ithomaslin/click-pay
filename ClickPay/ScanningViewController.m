@@ -7,6 +7,8 @@
 //
 
 #import <AVFoundation/AVCaptureSession.h>
+#import <AudioToolbox/AudioToolbox.h>
+#import <QuartzCore/QuartzCore.h>
 #import "ScanningViewController.h"
 #import "MyBillViewController.h"
 
@@ -14,11 +16,10 @@
     CALayer *__videoPreviewLayer;
 }
 
-@property (nonatomic, strong) UIBezierPath *scanAreaPath;
-@property (nonatomic, weak) UIView *cameraView;
 @property (nonatomic, weak) UIView *scanView;
+@property (nonatomic, strong) UIBarButtonItem *torchButton;
 @property (nonatomic) BOOL isScanning;
-
+@property (nonatomic) BOOL isTorchOn;
 @property (nonatomic, strong) AVCaptureVideoPreviewLayer *scanPreviewLayer;
 
 @end
@@ -39,13 +40,16 @@
     [super viewDidLoad];
     
     _captureSession = nil;
-    
-//    CGRect rect = [self.view frame];
+    _isTorchOn = NO;
     
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismissScanViewController)];
     self.navigationItem.leftBarButtonItem = cancelButton;
     self.navigationItem.title = @"Add new table";
     self.navigationItem.titleView.tintColor = [UIColor whiteColor];
+    
+    self.torchButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"torch-on"] style:UIBarButtonItemStylePlain target:self action:@selector(torchSwitch:)];
+    self.navigationItem.rightBarButtonItem = self.torchButton;
+    
     
     [self startCaptureSession];
     
@@ -53,9 +57,41 @@
     // so that we can easily remove all views by calling removeFromSuperview: on all subviews.
     UIView *previewView = [[UIView alloc] initWithFrame:self.view.frame];
     [self startScanningInView:previewView];
-    
     [self.view addSubview:previewView];
     
+    UIFont *fontHelveticaNeue = [UIFont fontWithName:@"HelveticaNeueLTStd-Bd" size:20];
+    UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(self.view.center.x - 125, self.view.center.y - 130, 250, 50)];
+    [textView setText:@"Aligh your scanner with the code on your table"];
+    [textView setTextColor:[UIColor whiteColor]];
+    [textView setBackgroundColor:[UIColor clearColor]];
+    [textView setTextAlignment:NSTextAlignmentCenter];
+    [textView setFont:fontHelveticaNeue];
+    [self.view addSubview:textView];
+    
+    UIImageView *overlayImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"overlay"]];
+    [overlayImageView setFrame:CGRectMake(self.view.center.x - 100, self.view.center.y - 70, 200, 200)];
+    [self.view addSubview:overlayImageView];
+    
+}
+
+- (void)torchSwitch:(id)sender {
+    AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    
+    if (device.hasFlash && device.hasTorch) {
+        [device lockForConfiguration:nil];
+        if (!self.isTorchOn) {
+            [device setTorchMode:AVCaptureTorchModeOn];
+            [device setFlashMode:AVCaptureFlashModeOn];
+            [self.torchButton setImage:[UIImage imageNamed:@"torch-off"]];
+            self.isTorchOn = YES;
+        } else {
+            [device setTorchMode:AVCaptureTorchModeOff];
+            [device setFlashMode:AVCaptureFlashModeOff];
+            [self.torchButton setImage:[UIImage imageNamed:@"torch-on"]];
+            self.isTorchOn = NO;
+        }
+        [device unlockForConfiguration];
+    }
 }
 
 - (void)startCaptureSession
@@ -126,6 +162,11 @@
         AVMetadataMachineReadableCodeObject *metadataObject = [metadataObjects objectAtIndex:0];
         if ([[metadataObject type] isEqualToString:AVMetadataObjectTypeQRCode]) {
             NSLog(@"%@", [metadataObject stringValue]);
+            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+            SystemSoundID soundID;
+            NSString *soundFile = [[NSBundle mainBundle] pathForResource:@"alert_bamboo" ofType:@"aac"];
+            AudioServicesCreateSystemSoundID((__bridge_retained CFURLRef)[NSURL fileURLWithPath:soundFile], &soundID);
+            AudioServicesPlaySystemSound(soundID);
             [self performSelectorOnMainThread:@selector(stopScanerWithScanningValue:) withObject:[metadataObject stringValue] waitUntilDone:YES];
         }
     }
