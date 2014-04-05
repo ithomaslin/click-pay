@@ -49,13 +49,8 @@
                                                                   action:@selector(saveInfo:)];
     self.navigationItem.rightBarButtonItem = saveButton;
     
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    dateFormatter.dateStyle = NSDateFormatterMediumStyle;
-    self.birthdayTextField.text = [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:[NSDate date]]];
-    
     self.picker = [[UIDatePicker alloc] init];
     self.picker.datePickerMode = UIDatePickerModeDate;
-    [self.picker addTarget:self action:@selector(dateChanged:) forControlEvents:UIControlEventEditingChanged];
     [self.birthdayTextField setInputView:self.picker];
     
     UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, -44, 320, 44)];
@@ -79,11 +74,6 @@
                                                                                            action:@selector(dismissKeyboard:)];
     tapGestureRecognizer.numberOfTapsRequired = 1;
     [self.view addGestureRecognizer:tapGestureRecognizer];
-}
-
-- (void)dateChanged:(id)sender {
-    self.picker = (UIDatePicker *)self.birthdayTextField.inputView;
-    self.birthdayTextField.text = [NSString stringWithFormat:@"%@", self.picker.date];
 }
 
 - (void)saveInfo:(id)sender {
@@ -146,7 +136,13 @@
 
 - (void)dismissKeyboard:(id)sender {
     if ([self.birthdayTextField isFirstResponder]) {
+        
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.dateStyle = NSDateFormatterMediumStyle;
+        self.picker = (UIDatePicker *)self.birthdayTextField.inputView;
+        self.birthdayTextField.text = [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:self.picker.date]];
         [self.birthdayTextField resignFirstResponder];
+        
     } else if ([self.nameTextField isFirstResponder]) {
         [self.nameTextField resignFirstResponder];
     } else {

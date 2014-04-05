@@ -72,6 +72,18 @@
         NSString *code = (!TARGET_IPHONE_SIMULATOR) ? [NSString stringWithFormat:@"%@", [self.codeDict objectForKey:[self.codes objectAtIndex:0]]] : @"886";
         self.countryCodeLabel.text = [NSString stringWithFormat:@"+%@", code];
     }
+    
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                           action:@selector(dismissKeyboard:)];
+    tapGestureRecognizer.numberOfTapsRequired = 1;
+    [self.view addGestureRecognizer:tapGestureRecognizer];
+    
+}
+
+- (void)dismissKeyboard:(id)sender {
+    if ([self.phoneTextField isFirstResponder]) {
+        [self.phoneTextField resignFirstResponder];
+    }
 }
 
 - (void)filterCountryForTerm:(NSString *)term {
@@ -104,17 +116,14 @@
     } else {
         [SVProgressHUD show];
         
-        NSString *countryCode = [[NSString alloc] initWithFormat:@"%@", self.countryCodeLabel.text];
-        NSNumberFormatter *formatter = [NSNumberFormatter new];
-        formatter.numberStyle = NSNumberFormatterNoStyle;
-        NSNumber *number = [formatter numberFromString:[NSString stringWithFormat:@"%@", self.phoneTextField.text]];
-        NSString *phoneNumber = [countryCode stringByAppendingString:[NSString stringWithFormat:@"%@", [formatter stringFromNumber:number]]];
-        
-        NSDictionary *param = @{@"phone": [NSString stringWithFormat:@"%@", phoneNumber]};
-        NSLog(@"%@", phoneNumber);
+        NSDictionary *param = @{
+                                @"country_code": self.countryCodeLabel.text,
+                                @"phone": self.phoneTextField.text
+                                };
+        NSLog(@"%@", param);
         
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        [manager POST:@"http://localhost:8000/account/signup"
+        [manager POST:@"http://clickpay.appcanvas.co/account/signup"
            parameters:param
               success:^(AFHTTPRequestOperation *operation, id responseObject) {
                   [SVProgressHUD dismiss];
@@ -128,7 +137,8 @@
                       UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
                       ActivationViewController *activationView = (ActivationViewController *)[storyboard instantiateViewControllerWithIdentifier:@"ActivationView"];
                       activationView.activationCode = message;
-                      activationView.phoneNumber = phoneNumber;
+                      activationView.countryCode = self.countryCodeLabel.text;
+                      activationView.phoneNumber = self.phoneTextField.text;
                       [self.navigationController pushViewController:activationView animated:YES];
                       
                   } else {

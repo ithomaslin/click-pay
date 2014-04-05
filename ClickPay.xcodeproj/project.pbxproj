@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		678C6F50446C4213869BCB13 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF98543F65D54FAABA8778D8 /* libPods.a */; };
-		C415056518D5D49A0042C2B4 /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C415056418D5D49A0042C2B4 /* AccountViewController.m */; };
-		C415056618D5D49A0042C2B4 /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C415056418D5D49A0042C2B4 /* AccountViewController.m */; };
 		C432D46418D60B3200D3763F /* Carda.otf in Resources */ = {isa = PBXBuildFile; fileRef = C432D46318D60B3200D3763F /* Carda.otf */; };
 		C432D46718D6164200D3763F /* HelveticaNeueLTStd-Bd.otf in Resources */ = {isa = PBXBuildFile; fileRef = C432D46618D6164200D3763F /* HelveticaNeueLTStd-Bd.otf */; };
 		C432D46A18D620F900D3763F /* MainPageContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C432D46918D620F900D3763F /* MainPageContentViewController.m */; };
@@ -43,6 +41,19 @@
 		C4955D4318D75FC600738AB1 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4955D4218D75FC600738AB1 /* SignUpViewController.m */; };
 		C49DC4B318E5322500A9E498 /* InfoRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C49DC4B218E5322500A9E498 /* InfoRegisterViewController.m */; };
 		C49DC4B418E5322500A9E498 /* InfoRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C49DC4B218E5322500A9E498 /* InfoRegisterViewController.m */; };
+		C49DC55318E5F06C00A9E498 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C49DC55218E5F06C00A9E498 /* RootViewController.m */; };
+		C49DC55418E5F06C00A9E498 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C49DC55218E5F06C00A9E498 /* RootViewController.m */; };
+		C49DC55818E7345600A9E498 /* UIColor+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = C49DC55718E7345600A9E498 /* UIColor+Alpha.m */; };
+		C49DC55918E7345600A9E498 /* UIColor+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = C49DC55718E7345600A9E498 /* UIColor+Alpha.m */; };
+		C49DC55D18E73A7800A9E498 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = C49DC55C18E73A7800A9E498 /* Utils.m */; };
+		C49DC55E18E73A7800A9E498 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = C49DC55C18E73A7800A9E498 /* Utils.m */; };
+		C49DC56318E9696800A9E498 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C49DC56218E9696800A9E498 /* ProfileViewController.m */; };
+		C49DC56418E9696800A9E498 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C49DC56218E9696800A9E498 /* ProfileViewController.m */; };
+		C49DC56F18E9B61500A9E498 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = C49DC56E18E9B61500A9E498 /* User.m */; };
+		C49DC57018E9B61500A9E498 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = C49DC56E18E9B61500A9E498 /* User.m */; };
+		C4C8ECBA18ED876C00E49DEB /* ClickpayAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C8ECB918ED876C00E49DEB /* ClickpayAPI.m */; };
+		C4C8ECC118EE8DBB00E49DEB /* Bill.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C8ECC018EE8DBB00E49DEB /* Bill.m */; };
+		C4C8ECC218EE8DBB00E49DEB /* Bill.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C8ECC018EE8DBB00E49DEB /* Bill.m */; };
 		C4CEC9C318D7343C00C07E34 /* AddCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CEC9C218D7343C00C07E34 /* AddCardViewController.m */; };
 		C4D71F4118DB6DD8000DB3C0 /* SigninViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4D71F4018DB6DD8000DB3C0 /* SigninViewController.m */; };
 		C4DA5FA918D49C5600C4C5BD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4DA5FA818D49C5600C4C5BD /* Foundation.framework */; };
@@ -81,8 +92,6 @@
 
 /* Begin PBXFileReference section */
 		7FAE539DCA0A40CC9C412F7D /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
-		C415056318D5D49A0042C2B4 /* AccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountViewController.h; sourceTree = "<group>"; };
-		C415056418D5D49A0042C2B4 /* AccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountViewController.m; sourceTree = "<group>"; };
 		C432D46318D60B3200D3763F /* Carda.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Carda.otf; sourceTree = "<group>"; };
 		C432D46618D6164200D3763F /* HelveticaNeueLTStd-Bd.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HelveticaNeueLTStd-Bd.otf"; sourceTree = "<group>"; };
 		C432D46818D620F900D3763F /* MainPageContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPageContentViewController.h; sourceTree = "<group>"; };
@@ -142,6 +151,20 @@
 		C4955D4218D75FC600738AB1 /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
 		C49DC4B118E5322500A9E498 /* InfoRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoRegisterViewController.h; sourceTree = "<group>"; };
 		C49DC4B218E5322500A9E498 /* InfoRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoRegisterViewController.m; sourceTree = "<group>"; };
+		C49DC55118E5F06C00A9E498 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		C49DC55218E5F06C00A9E498 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		C49DC55618E7345600A9E498 /* UIColor+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Alpha.h"; sourceTree = "<group>"; };
+		C49DC55718E7345600A9E498 /* UIColor+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Alpha.m"; sourceTree = "<group>"; };
+		C49DC55B18E73A7800A9E498 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		C49DC55C18E73A7800A9E498 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
+		C49DC56118E9696800A9E498 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		C49DC56218E9696800A9E498 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		C49DC56D18E9B61500A9E498 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		C49DC56E18E9B61500A9E498 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		C4C8ECB818ED876C00E49DEB /* ClickpayAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClickpayAPI.h; sourceTree = "<group>"; };
+		C4C8ECB918ED876C00E49DEB /* ClickpayAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClickpayAPI.m; sourceTree = "<group>"; };
+		C4C8ECBF18EE8DBB00E49DEB /* Bill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bill.h; sourceTree = "<group>"; };
+		C4C8ECC018EE8DBB00E49DEB /* Bill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bill.m; sourceTree = "<group>"; };
 		C4CEC9C118D7343C00C07E34 /* AddCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddCardViewController.h; sourceTree = "<group>"; };
 		C4CEC9C218D7343C00C07E34 /* AddCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCardViewController.m; sourceTree = "<group>"; };
 		C4D71F3F18DB6DD8000DB3C0 /* SigninViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SigninViewController.h; sourceTree = "<group>"; };
@@ -264,6 +287,8 @@
 		C462116918E008E30040BAFC /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				C49DC55118E5F06C00A9E498 /* RootViewController.h */,
+				C49DC55218E5F06C00A9E498 /* RootViewController.m */,
 				C4DA615D18D4B94000C4C5BD /* ViewController.h */,
 				C4DA615E18D4B94000C4C5BD /* ViewController.m */,
 				C432D46818D620F900D3763F /* MainPageContentViewController.h */,
@@ -272,11 +297,40 @@
 			name = Main;
 			sourceTree = "<group>";
 		};
+		C49DC55A18E7388300A9E498 /* UIColor+Alpha */ = {
+			isa = PBXGroup;
+			children = (
+				C49DC55618E7345600A9E498 /* UIColor+Alpha.h */,
+				C49DC55718E7345600A9E498 /* UIColor+Alpha.m */,
+			);
+			name = "UIColor+Alpha";
+			sourceTree = "<group>";
+		};
+		C49DC55F18E73E5400A9E498 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				C49DC55B18E73A7800A9E498 /* Utils.h */,
+				C49DC55C18E73A7800A9E498 /* Utils.m */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		C49DC56018E73E5F00A9E498 /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				C49DC55F18E73E5400A9E498 /* Utils */,
+				C49DC55A18E7388300A9E498 /* UIColor+Alpha */,
+			);
+			name = Splash;
+			sourceTree = "<group>";
+		};
 		C4CEC9BD18D7315500C07E34 /* Account */ = {
 			isa = PBXGroup;
 			children = (
-				C415056318D5D49A0042C2B4 /* AccountViewController.h */,
-				C415056418D5D49A0042C2B4 /* AccountViewController.m */,
+				C49DC56118E9696800A9E498 /* ProfileViewController.h */,
+				C49DC56218E9696800A9E498 /* ProfileViewController.m */,
+				C49DC56D18E9B61500A9E498 /* User.h */,
+				C49DC56E18E9B61500A9E498 /* User.m */,
 			);
 			name = Account;
 			sourceTree = "<group>";
@@ -379,16 +433,21 @@
 			isa = PBXGroup;
 			children = (
 				C4DA616218D4BC2A00C4C5BD /* TransitionControllers */,
+				C49DC56018E73E5F00A9E498 /* Splash */,
 				C4DA5FB718D49C5600C4C5BD /* AppDelegate.h */,
 				C4DA5FB818D49C5600C4C5BD /* AppDelegate.m */,
 				C462116218DFF8E60040BAFC /* Application.h */,
 				C462116318DFF8E60040BAFC /* Application.m */,
 				C4DA5FBA18D49C5600C4C5BD /* Main.storyboard */,
 				C4DA5FC018D49C5600C4C5BD /* Images.xcassets */,
+				C4C8ECB818ED876C00E49DEB /* ClickpayAPI.h */,
+				C4C8ECB918ED876C00E49DEB /* ClickpayAPI.m */,
 				C433A55918E01A0D00CFBA92 /* ScanningViewController.h */,
 				C433A55A18E01A0D00CFBA92 /* ScanningViewController.m */,
 				C433A55D18E0546B00CFBA92 /* MyBillViewController.h */,
 				C433A55E18E0546B00CFBA92 /* MyBillViewController.m */,
+				C4C8ECBF18EE8DBB00E49DEB /* Bill.h */,
+				C4C8ECC018EE8DBB00E49DEB /* Bill.m */,
 				C462116918E008E30040BAFC /* Main */,
 				C4D71F4618DC6F0A000DB3C0 /* Menu */,
 				C4D71F4518DC6EED000DB3C0 /* Authentication */,
@@ -596,22 +655,28 @@
 				C433A56D18E2AE0500CFBA92 /* WalletViewController.m in Sources */,
 				C433A56918E14D6400CFBA92 /* ForgotViewController.m in Sources */,
 				C433A55F18E0546B00CFBA92 /* MyBillViewController.m in Sources */,
-				C415056518D5D49A0042C2B4 /* AccountViewController.m in Sources */,
 				C49DC4B318E5322500A9E498 /* InfoRegisterViewController.m in Sources */,
 				C462115718DF1E360040BAFC /* CredentialStore.m in Sources */,
 				C462115A18DFE23C0040BAFC /* AuthAPIClient.m in Sources */,
+				C49DC55318E5F06C00A9E498 /* RootViewController.m in Sources */,
 				C4DA5FB918D49C5600C4C5BD /* AppDelegate.m in Sources */,
 				C462115418DE7BF70040BAFC /* ActivationViewController.m in Sources */,
 				C4776FA418E345C8008DB873 /* DetailViewController.m in Sources */,
+				C49DC55818E7345600A9E498 /* UIColor+Alpha.m in Sources */,
 				C462116418DFF8E60040BAFC /* Application.m in Sources */,
 				C4CEC9C318D7343C00C07E34 /* AddCardViewController.m in Sources */,
 				C433A55B18E01A0D00CFBA92 /* ScanningViewController.m in Sources */,
 				C4DA615F18D4B94000C4C5BD /* ViewController.m in Sources */,
+				C49DC55D18E73A7800A9E498 /* Utils.m in Sources */,
+				C49DC56318E9696800A9E498 /* ProfileViewController.m in Sources */,
 				C4D71F4118DB6DD8000DB3C0 /* SigninViewController.m in Sources */,
 				C4DA5FB518D49C5600C4C5BD /* main.m in Sources */,
 				C433A57518E2B47B00CFBA92 /* Card.m in Sources */,
 				C46EF2A218D9AD00007B0CEB /* CDPickerViewController.m in Sources */,
+				C49DC56F18E9B61500A9E498 /* User.m in Sources */,
 				C432D46A18D620F900D3763F /* MainPageContentViewController.m in Sources */,
+				C4C8ECC118EE8DBB00E49DEB /* Bill.m in Sources */,
+				C4C8ECBA18ED876C00E49DEB /* ClickpayAPI.m in Sources */,
 				C46EF2A718D9E349007B0CEB /* InfoViewController.m in Sources */,
 				C4DA616A18D4BC2A00C4C5BD /* ZoomAnimationController.m in Sources */,
 				C462115018DDA26F0040BAFC /* ContainerViewController.m in Sources */,
@@ -624,13 +689,18 @@
 			files = (
 				C4DA616B18D4BC2A00C4C5BD /* ZoomAnimationController.m in Sources */,
 				C433A56E18E2AE0500CFBA92 /* WalletViewController.m in Sources */,
+				C49DC55418E5F06C00A9E498 /* RootViewController.m in Sources */,
 				C433A56A18E14D6400CFBA92 /* ForgotViewController.m in Sources */,
+				C4C8ECC218EE8DBB00E49DEB /* Bill.m in Sources */,
+				C49DC56418E9696800A9E498 /* ProfileViewController.m in Sources */,
+				C49DC57018E9B61500A9E498 /* User.m in Sources */,
 				C4DA616018D4B94000C4C5BD /* ViewController.m in Sources */,
+				C49DC55E18E73A7800A9E498 /* Utils.m in Sources */,
 				C4DA616918D4BC2A00C4C5BD /* DropAnimationController.m in Sources */,
 				C4776FA518E345C8008DB873 /* DetailViewController.m in Sources */,
 				C433A57618E2B47B00CFBA92 /* Card.m in Sources */,
+				C49DC55918E7345600A9E498 /* UIColor+Alpha.m in Sources */,
 				C4DA5FD418D49C5600C4C5BD /* ClickPayTests.m in Sources */,
-				C415056618D5D49A0042C2B4 /* AccountViewController.m in Sources */,
 				C4DA615C18D4B89700C4C5BD /* MenuViewController.m in Sources */,
 				C49DC4B418E5322500A9E498 /* InfoRegisterViewController.m in Sources */,
 			);

@@ -7,6 +7,7 @@
 //
 
 #import "WalletViewController.h"
+#import "MenuViewController.h"
 #import "DetailViewController.h"
 #import "AddCardViewController.h"
 #import "SVProgressHUD.h"
@@ -32,7 +33,7 @@
         [[AuthAPIClient sharedClient] GET:@"/wallet"
                                parameters:nil
                                   success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                      
+                                      NSLog(@"%@", responseObject);
                                       NSMutableArray *results = [NSMutableArray array];
                                       for (id cardDictionary in [responseObject objectForKey:@"card"]) {
                                           Card *card = [[Card alloc] initWithDictionary:cardDictionary];
@@ -61,6 +62,9 @@
     UIBarButtonItem *addCardButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewCard)];
     self.navigationItem.rightBarButtonItem = addCardButton;
     
+    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"navigation-btn-menu"] style:UIBarButtonItemStyleBordered target:self action:@selector(backToHome)];
+    self.navigationItem.leftBarButtonItem = menuButton;
+    
     self.refreshControl = [[UIRefreshControl alloc] init];
     self.refreshControl.tintColor = UIColorFromRGB(0x0139DEB);
     [self.refreshControl addTarget:self
@@ -70,6 +74,12 @@
     
     [SVProgressHUD showWithStatus:@"Getting your wallet..." maskType:SVProgressHUDMaskTypeClear];
     [self refresh];
+}
+
+- (void)backToHome {
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    MenuViewController *menuViewController = (MenuViewController *)[storyboard instantiateViewControllerWithIdentifier:@"MenuViewController"];
+    [self presentLeftMenuViewController:menuViewController];
 }
 
 - (void)addNewCard {
@@ -108,9 +118,9 @@
     
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-        cell.contentView.backgroundColor = UIColorFromRGB(0x0F8F8F8);
         cell.textLabel.font = [UIFont boldSystemFontOfSize:14];
         cell.textLabel.textColor = UIColorFromRGB(0x05B6FE7);
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
     Card *card = [self.results objectAtIndex:indexPath.row];
@@ -120,10 +130,15 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    cell.backgroundColor = UIColorFromRGB(0x0F8F8F8);
+}
+
 #pragma mark - Navigation
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self performSegueWithIdentifier:@"CellDetail" sender:nil];
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -147,7 +162,6 @@
 
 - (void)didUpdateWith:(DetailViewController *)controller {
     [controller.navigationController popViewControllerAnimated:YES];
-    [SVProgressHUD showWithStatus:@"Updating..."];
     [self refresh];
 }
 

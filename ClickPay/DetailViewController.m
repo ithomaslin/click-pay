@@ -36,6 +36,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    if (self.tableView.contentSize.height < self.tableView.frame.size.height) {
+        self.tableView.scrollEnabled = NO;
+    }
     [self.tableView setBackgroundColor:UIColorFromRGB(0x0F8F8F8)];
     
     UIBarButtonItem *updateButton = [[UIBarButtonItem alloc] initWithTitle:@"Update"
@@ -66,7 +69,7 @@
 - (void)updateCardDetail:(id)sender {
     [SVProgressHUD show];
     
-    NSString *switchValue = (self.switchDefault) ? @"YES" : @"NO";
+    NSString *switchValue = (self.switchDefault.on) ? @"YES" : @"NO";
     NSString *lastFourDigits = [self.cardNumber.text stringByReplacingOccurrencesOfString:@"xxxx-xxxx-xxxx-"
                                                                                withString:@""];
     NSDictionary *param = @{
@@ -81,9 +84,9 @@
                                success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                    NSString *success = [responseObject objectForKey:@"success"];
                                    if ([success isEqualToString:@"YES"]) {
+                                       [SVProgressHUD dismiss];
                                        [self pushBackToRootViewController];
                                    }
-                                   [SVProgressHUD dismiss];
                                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                    if (operation.response.statusCode == 500) {
                                        [SVProgressHUD showErrorWithStatus:@"Something went worng"];
@@ -138,9 +141,17 @@
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Delete"
                                                     message:@"You're about to delete this card, continue?"
                                                    delegate:self
-                                          cancelButtonTitle:@"YES"
-                                          otherButtonTitles:@"NO", nil];
+                                          cancelButtonTitle:@"NO"
+                                          otherButtonTitles:@"YES", nil];
     [alert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex) {
+        case 1:
+            NSLog(@"OK");
+            break;
+    }
 }
 
 @end

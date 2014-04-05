@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "DetailViewController.h"
+#import "RESideMenu.h"
 
 @interface WalletViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, detailDelegate>
 

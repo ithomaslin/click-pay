@@ -9,6 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "STPView.h"
 
+@class AddCardViewController;
+@protocol AddCardDelegate <NSObject>
+
+
+
+@end
+
 @interface AddCardViewController : UIViewController<STPViewDelegate>
 @property STPView* stripeView;
 

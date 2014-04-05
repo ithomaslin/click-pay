@@ -43,7 +43,7 @@
     self.navigationItem.title = @"Activation";
     
     [self.bottomView setBackgroundColor:UIColorFromRGB(0x0F8F8F8)];
-    [self.activeButton setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"button-green"]]];
+    [self.activeButton setBackgroundColor:UIColorFromRGB(0x085D490)];
     self.activeButton.tintColor = [UIColor whiteColor];
     self.activeButton.layer.cornerRadius = 5;
 }
@@ -69,7 +69,7 @@
         NSDictionary *param = @{@"pin": self.pintextField.text};
         
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        [manager POST:[NSString stringWithFormat:@"http://localhost:8000/account/activate/%@", self.activationCode]
+        [manager POST:[NSString stringWithFormat:@"http://clickpay.appcanvas.co/account/activate/%@", self.activationCode]
            parameters:param
               success:^(AFHTTPRequestOperation *operation, id responseObject) {
                   [SVProgressHUD dismiss];
@@ -103,7 +103,10 @@
 
 - (IBAction)requestNewPin:(id)sender {
     [SVProgressHUD show];
-    NSDictionary *param = @{@"phone": self.phoneNumber};
+    NSDictionary *param = @{
+                            @"country_code": self.countryCode,
+                            @"phone": self.phoneNumber
+                            };
     
     [[AuthAPIClient sharedClient] POST:[NSString stringWithFormat:@"/account/newpin/%@", self.activationCode]
                             parameters:param
@@ -134,6 +137,7 @@
 
 - (void)performLoginPrecedure {
     NSDictionary *param = @{
+                            @"country_code": self.countryCode,
                             @"phone": self.phoneNumber,
                             @"pin": self.pintextField.text
                             };

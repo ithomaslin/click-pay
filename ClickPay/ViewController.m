@@ -8,12 +8,8 @@
 
 #import "AppDelegate.h"
 #import "ViewController.h"
-#import "DropAnimationController.h"
-#import "ZoomAnimationController.h"
 #import "ADVAnimationController.h"
 #import "MenuViewController.h"
-#import "AccountViewController.h"
-#import "WalletViewController.h"
 #import "SignUpViewController.h"
 #import "AFNetworking.h"
 #import "ContainerViewController.h"
@@ -22,29 +18,35 @@
 #import "CredentialStore.h"
 #import "ScanningViewController.h"
 #import "RESideMenu.h"
+#import "UIColor+Alpha.h"
+#import "Utils.h"
+
+#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 @interface ViewController ()
 
 @property (nonatomic, strong) id<ADVAnimationController> animationController;
-
 @property (nonatomic, strong) CredentialStore *credentialStore;
 
 @end
 
 @implementation ViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor clearColor];
+    NSString* color = [[NSUserDefaults standardUserDefaults] objectForKey:@"kBlurredGradientStartColor"];
+    
+    if (!color) {
+        NSString* startColor = [UIColor stringFromUIColor:UIColorFromRGB(0x04CE4BE)];
+        NSString* endColor = [UIColor stringFromUIColor:UIColorFromRGB(0x03869CC)];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:startColor forKey:@"kBlurredGradientStartColor"];
+        [[NSUserDefaults standardUserDefaults] setObject:endColor forKey:@"kBlurredGradientEndColor"];
+    }
+    [Utils customizeView:self.view];
+    
     self.credentialStore = [[CredentialStore alloc] init];
     
     // Create the data model
@@ -68,18 +70,15 @@
     [self.view addSubview:_pageViewController.view];
     [self.pageViewController didMoveToParentViewController:self];
     
-    // Prepare the requireed custom settings
-    UIColor* color0 = [UIColor colorWithRed: 0.076 green: 0.615 blue: 0.92 alpha: 1];
-    UIColor* color1 = [UIColor colorWithRed: 1 green: 1 blue: 1 alpha: 1];
-    UIFont *fontCarda = [UIFont fontWithName:@"HelveticaNeueLTStd-Bd" size:30];
-    
-	[self.navigationController setNavigationBarHidden:YES];
+    UIFont *font = [UIFont boldSystemFontOfSize:25];
+	[self.navigationController setNavigationBarHidden:NO];
     [_menuButton setImage:[UIImage imageNamed:@"button-menu.png"] forState:UIControlStateNormal];
     [_menuButton addTarget:self action:@selector(showMenuViewController:) forControlEvents:UIControlEventTouchUpInside];
     
-    _addTableButton.titleLabel.font = fontCarda;
-    [_addTableButton setTitleColor:color1 forState:UIControlStateNormal];
-    [_addTableButton setBackgroundColor:color0];
+    _addTableButton.titleLabel.font = font;
+    _addTableButton.layer.cornerRadius = 1;
+    [_addTableButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [_addTableButton setBackgroundColor:UIColorFromRGB(0x042C3AD)];
     
 }
 
@@ -91,10 +90,8 @@
 - (void)showMenuViewController:(id)sender {
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
     MenuViewController *menuViewController = (MenuViewController *)[storyboard instantiateViewControllerWithIdentifier:@"MenuViewController"];
-    menuViewController.menuDelegate = self;
-    self.animationController = [[ZoomAnimationController alloc] init];
-    menuViewController.transitioningDelegate = self;
-    [self presentViewController:menuViewController animated:YES completion:nil];
+    [self presentLeftMenuViewController:menuViewController];
+    
 }
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
@@ -112,56 +109,10 @@
     return self.animationController;
 }
 
-- (void)didSelectWith:(MenuViewController *)controller withIdentifier:(NSString *)identifier {
-    
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-    SignUpViewController *signUpView = (SignUpViewController *)[storyboard instantiateViewControllerWithIdentifier:@"SignUpView"];
-    
-    if ([identifier isEqualToString:@"account"]) {
-        if (![[controller presentedViewController] isBeingDismissed]) {
-            [controller dismissViewControllerAnimated:YES completion:^{
-                if (![self.credentialStore isLoggedIn]) {
-                    [self willRequireDropAnimationWith:signUpView];
-                } else {
-                    AccountViewController *accountView = (AccountViewController *)[storyboard instantiateViewControllerWithIdentifier:@"AccountView"];
-                    [self.navigationController pushViewController:accountView animated:YES];
-                }
-            }];
-        }
-    } else if ([identifier isEqualToString:@"wallet"]) {
-        if (![[controller presentedViewController] isBeingDismissed]) {
-            [controller dismissViewControllerAnimated:YES completion:^{
-                if (![self.credentialStore isLoggedIn]) {
-                    [self willRequireDropAnimationWith:signUpView];
-                    
-                } else {
-                    WalletViewController *walletView = (WalletViewController *)[storyboard instantiateViewControllerWithIdentifier:@"WalletView"];
-                    [self.navigationController pushViewController:walletView animated:YES];
-                }
-            }];
-        }
-    } else {
-        if (![[controller presentedViewController] isBeingDismissed]) {
-            [controller dismissViewControllerAnimated:YES completion:nil];
-        }
-    }
-}
-
-- (void)willRequireDropAnimationWith:(SignUpViewController *)controller {
-    ContainerViewController *containerVC = [[ContainerViewController alloc] initWithViewController:controller];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:containerVC];
-    containerVC.navigationItem.title = @"Sign Up";
-    
-    self.animationController = [[DropAnimationController alloc] init];
-    nav.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    nav.transitioningDelegate = self;
-    
-    [self presentViewController:nav animated:YES completion:nil];
-}
-
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES];
+    [Utils customizeView:self.view];
 }
 
 - (MainPageContentViewController *)viewControllerAtIndex:(NSUInteger)index
@@ -233,5 +184,13 @@
             [SVProgressHUD dismiss];
         }];
     }
+}
+
+- (void)willRequireDropAnimationWith:(SignUpViewController *)controller {
+    ContainerViewController *containerVC = [[ContainerViewController alloc] initWithViewController:controller];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:containerVC];
+    containerVC.navigationItem.title = @"Sign Up";
+    
+    [self presentViewController:nav animated:YES completion:nil];
 }
 @end

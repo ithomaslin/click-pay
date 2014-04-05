@@ -16,7 +16,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    UIColor *color0 = UIColorFromRGB(0x0139DEB);
+    UIColor *color0 = UIColorFromRGB(0x042C3AD);
     [[UINavigationBar appearance] setBarTintColor:color0];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1], NSForegroundColorAttributeName, nil]];
@@ -24,9 +24,9 @@
     
     UIPageControl *pageControl = [UIPageControl appearance];
     pageControl.pageIndicatorTintColor = [UIColor whiteColor];
-    pageControl.currentPageIndicatorTintColor = UIColorFromRGB(0x05B6FE7);
+    pageControl.currentPageIndicatorTintColor = UIColorFromRGB(0x04ADABF);
     
-    [[BlurryModalSegue appearance] setBackingImageBlurRadius:@(7.5)];
+    [[BlurryModalSegue appearance] setBackingImageBlurRadius:@(10)];
     [[BlurryModalSegue appearance] setBackingImageSaturationDeltaFactor:@(.55)];
     [[BlurryModalSegue appearance] setBackingImageTintColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:.55]];
     

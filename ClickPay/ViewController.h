@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MenuViewController.h"
 #import "MainPageContentViewController.h"
+#import "RESideMenu.h"
 
 @interface ViewController : UIViewController
 <UIViewControllerTransitioningDelegate, UINavigationControllerDelegate, UIPageViewControllerDataSource,
-menuDelegate>
+RESideMenuDelegate>
 
 @property (strong, nonatomic) UIPageViewController *pageViewController;
 @property (strong, nonatomic) NSArray *pageImages;

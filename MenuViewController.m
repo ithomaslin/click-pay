@@ -8,23 +8,24 @@
 
 #import "MenuViewController.h"
 #import "ViewController.h"
+#import "DropAnimationController.h"
+#import "SigninViewController.h"
 #import "SignUpViewController.h"
 #import "BlurryModalSegue.h"
 #import "AFNetworking.h"
 #import "SVProgressHUD.h"
 #import "AuthAPIClient.h"
 #import "CredentialStore.h"
+#import "ContainerViewController.h"
+#import "InfoViewController.h"
 
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
-
 
 const CGFloat PanelHeight = 400.0;
 
 @interface MenuViewController ()
 
-@property (nonatomic, strong) UIView *panel;
-@property (nonatomic, strong) UIImage *blurImage;
-@property (nonatomic, strong) UIImageView *blurImageView;
+@property (nonatomic, strong) id<ADVAnimationController> animationController;
 @property (nonatomic, strong) CredentialStore *credentialStore;
 @property (nonatomic, strong) UIButton *logoutButton;
 
@@ -32,11 +33,11 @@ const CGFloat PanelHeight = 400.0;
 
 @implementation MenuViewController
 
-@synthesize menuDelegate;
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self.scrollView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"billow"]]];
     self.credentialStore = [[CredentialStore alloc] init];
     
     UIFont *fontHelveticaNeue = [UIFont fontWithName:@"HelveticaNeueLTStd-Bd" size:28];
@@ -45,40 +46,10 @@ const CGFloat PanelHeight = 400.0;
     [_accountButton.titleLabel setFont:fontHelveticaNeue];
     [_walletButton.titleLabel setFont:fontHelveticaNeue];
     
-    self.logoutButton = [[UIButton alloc] initWithFrame:CGRectMake(100, 350, 124, 37)];
-    [self.logoutButton setTitle:@"Log out" forState:UIControlStateNormal];
-    [self.logoutButton setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"button-orange"]]];
-    [self.logoutButton setTintColor:[UIColor whiteColor]];
-    [self.logoutButton addTarget:self action:@selector(logoutButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.logoutButton];
-    
-    [self logoutButtonPresentByStatus:[self.credentialStore isLoggedIn]];
-    
     _homeButton.contentHorizontalAlignment =
     _accountButton.contentHorizontalAlignment =
     _walletButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     
-}
-
-- (void)logoutButtonPresentByStatus:(BOOL) status {
-    if (status == YES) {
-        self.logoutButton.hidden = NO;
-    } else {
-        self.logoutButton.hidden = YES;
-    }
-}
-
-- (void)logoutButtonPressed {
-    [SVProgressHUD show];
-    [[AuthAPIClient sharedClient] GET:@"/account/signout"
-                           parameters:nil
-                              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                  [self.credentialStore setAuthToken:nil];
-                                  [self logoutButtonPresentByStatus:[self.credentialStore isLoggedIn]];
-                                  [SVProgressHUD dismiss];
-                              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                  
-                              }];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -98,23 +69,43 @@ const CGFloat PanelHeight = 400.0;
 
 - (IBAction)buttonPressed:(id)sender {
     UIButton *homeButton = sender;
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    SignUpViewController *signUpView = (SignUpViewController *)[storyboard instantiateViewControllerWithIdentifier:@"SignUpView"];
+    
     switch (homeButton.tag) {
         case 100: {
-            [menuDelegate didSelectWith:self withIdentifier:@"home"];
+            [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"Home"]]];
+            [self.sideMenuViewController hideMenuViewController];
         }
             break;
         case 101: {
-            [menuDelegate didSelectWith:self withIdentifier:@"account"];
+            if ([self.credentialStore isLoggedIn]) {
+                [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"AccountView"]]];
+            } else {
+                [self willRequireDropAnimationWith:signUpView];
+            }
+            [self.sideMenuViewController hideMenuViewController];
         }
             break;
         case 102: {
-            [menuDelegate didSelectWith:self withIdentifier:@"wallet"];
+            if ([self.credentialStore isLoggedIn]) {
+                [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"WalletView"]]];
+            } else {
+                [self willRequireDropAnimationWith:signUpView];
+            }
+            [self.sideMenuViewController hideMenuViewController];
         }
-            break;
-        default:
             break;
     }
     
+}
+
+- (void)willRequireDropAnimationWith:(SignUpViewController *)controller {
+    ContainerViewController *containerVC = [[ContainerViewController alloc] initWithViewController:controller];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:containerVC];
+    containerVC.navigationItem.title = @"Sign Up";
+    
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 @end

@@ -14,6 +14,7 @@
 #import "SigninViewController.h"
 #import "SignUpViewController.h"
 #import "ContainerViewController.h"
+#import "MenuViewController.h"
 #import "SVProgressHUD.h"
 #import "CDPickerViewController.h"
 #import "AuthAPIClient.h"
@@ -73,6 +74,19 @@
         NSString __autoreleasing *code = (!TARGET_IPHONE_SIMULATOR) ? [NSString stringWithFormat:@"%@", [self.codeDict objectForKey:[self.codes objectAtIndex:0]]] : @"886";
         self.countryCodeLabel.text = [NSString stringWithFormat:@"+%@", code];
     }
+    
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                           action:@selector(dismissKeyboard:)];
+    tapGestureRecognizer.numberOfTapsRequired = 1;
+    [self.view addGestureRecognizer:tapGestureRecognizer];
+}
+
+- (void)dismissKeyboard:(id)sender {
+    if ([self.phoneTextField isFirstResponder]) {
+        [self.phoneTextField resignFirstResponder];
+    } else {
+        [self.pinTextField resignFirstResponder];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -100,46 +114,57 @@
 
 - (IBAction)signinButtonPressed:(id)sender {
     
-    [self.pinTextField resignFirstResponder];
+    [self dismissKeyboard:sender];
     
-    [SVProgressHUD show];
-    
-    NSString *countryCode = [[NSString alloc] initWithFormat:@"%@", self.countryCodeLabel.text];
-    NSNumberFormatter *formatter = [NSNumberFormatter new];
-    formatter.numberStyle = NSNumberFormatterNoStyle;
-    NSNumber *number = [formatter numberFromString:[NSString stringWithFormat:@"%@", self.phoneTextField.text]];
-    NSString *phoneNumber = [countryCode stringByAppendingString:[NSString stringWithFormat:@"%@", [formatter stringFromNumber:number]]];
-    NSString *pinCode = [NSString stringWithFormat:@"%@", self.pinTextField.text];
-    
-    NSDictionary *param = @{
-        @"phone": phoneNumber,
-        @"pin": pinCode
-    };
-    
-    [[AuthAPIClient sharedClient] POST:@"/account/signin"
-                            parameters:param
-                               success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                   
-                                   NSString *authToken = [responseObject objectForKey:@"auth_token"];
-                                   [self.credentialStore setAuthToken:authToken];
-                                   NSLog(@"%@", authToken);
-                                   [self dismissViewControllerAnimated:YES completion:^{
-                                       [SVProgressHUD dismiss];
-                                   }];
-                                   
-                               } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                   if (operation.response.statusCode == 500) {
-                                       [SVProgressHUD showErrorWithStatus:@"Something went worng"];
-                                   } else {
-                                       NSData *jsonData = [operation.responseString dataUsingEncoding:NSUTF8StringEncoding];
-                                       NSDictionary *json = [NSJSONSerialization JSONObjectWithData:jsonData
-                                                                                            options:NSJSONReadingAllowFragments
-                                                                                              error:&error];
+    if (![self.phoneTextField.text isEqualToString:@""] || ![self.pinTextField.text isEqualToString:@""]) {
+        [self dismissKeyboard:sender];
+        [SVProgressHUD show];
+        
+        NSDictionary *param = @{
+                                @"country_code": self.countryCodeLabel.text,
+                                @"phone": self.phoneTextField.text,
+                                @"pin": self.pinTextField.text
+                                };
+        
+        [[AuthAPIClient sharedClient] POST:@"/account/signin"
+                                parameters:param
+                                   success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                        
-                                       NSString *errorMessage = [json objectForKey:@"error"];
-                                       [SVProgressHUD showErrorWithStatus:errorMessage];
-                                   }
-                               }];
+                                       NSString *success = [responseObject objectForKey:@"success"];
+                                       NSString *message = [responseObject objectForKey:@"message"];
+                                       
+                                       if ([success isEqualToString:@"YES"]) {
+                                           NSString *authToken = [responseObject objectForKey:@"auth_token"];
+                                           [self.credentialStore setAuthToken:authToken];
+                                           NSLog(@"%@", authToken);
+                                           [self dismissViewControllerAnimated:YES completion:^{
+                                               [SVProgressHUD dismiss];
+                                           }];
+                                       } else {
+                                           [SVProgressHUD showErrorWithStatus:message];
+                                       }
+                                       
+                                   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                       if (operation.response.statusCode == 500) {
+                                           [SVProgressHUD showErrorWithStatus:@"Something went worng"];
+                                       } else {
+                                           NSData *jsonData = [operation.responseString dataUsingEncoding:NSUTF8StringEncoding];
+                                           NSDictionary *json = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                                                                options:NSJSONReadingAllowFragments
+                                                                                                  error:&error];
+                                           
+                                           NSString *errorMessage = [json objectForKey:@"error"];
+                                           [SVProgressHUD showErrorWithStatus:errorMessage];
+                                       }
+                                   }];
+    } else {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"OOPS!"
+                                                            message:@"Phone and pin can't be empty"
+                                                           delegate:self
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil, nil];
+        [alertView show];
+    }
 }
 
 - (IBAction)switchModeButtonPressed:(id)sender {

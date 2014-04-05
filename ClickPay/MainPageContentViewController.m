@@ -7,11 +7,13 @@
 //
 
 #import "MainPageContentViewController.h"
+#import "AuthAPIClient.h"
+#import "CredentialStore.h"
 
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 @interface MainPageContentViewController ()
-
+@property (nonatomic, strong) CredentialStore *credentialStore;
 @end
 
 @implementation MainPageContentViewController
@@ -28,6 +30,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.credentialStore = [[CredentialStore alloc] init];
+    self.view.backgroundColor = [UIColor clearColor];
+    
     UIFont *font0 = [UIFont fontWithName:@"HelveticaNeueLTStd-Bd" size:25];
     UIFont *font1 = [UIFont fontWithName:@"HelveticaNeueLTStd-Bd" size:14];
 	
@@ -41,10 +46,15 @@
     
     UIButton *startButton = [[UIButton alloc] init];
     [startButton setTitle:@"START" forState:UIControlStateNormal];
-    [startButton setBackgroundColor:UIColorFromRGB(0x05C75E1)];
+    [startButton setBackgroundColor:UIColorFromRGB(0x03A78CA)];
     [startButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [startButton addTarget:self action:@selector(startButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    startButton.frame = CGRectMake(32, 100, 256, 64);
+    CGFloat buttonWidth = 256,
+            buttonHeight = 64;
+    startButton.frame = CGRectMake((self.view.frame.size.width - buttonWidth) / 2,
+                                   (self.view.frame.size.height - buttonHeight) / 5,
+                                   buttonWidth,
+                                   buttonHeight);
     startButton.layer.cornerRadius = 5;
     
     if ([_titleLabel.text isEqualToString:@""]) {
@@ -60,8 +70,7 @@
 }
 
 - (void)startButtonPressed:(id)sender {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Start" message:@"You just pressed the start button" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-    [alert show];
+    
 }
 
 @end

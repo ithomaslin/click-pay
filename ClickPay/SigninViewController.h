@@ -11,6 +11,7 @@
 
 @interface SigninViewController : UIViewController
 <CDPickerDelegate>
+
 @property (strong, nonatomic) IBOutlet UILabel *countryCodeLabel;
 @property (strong, nonatomic) IBOutlet UITextField *phoneTextField;
 @property (strong, nonatomic) IBOutlet UITextField *pinTextField;
@@ -18,7 +19,6 @@
 @property (strong, nonatomic) IBOutlet UIButton *signupButton;
 @property (strong, nonatomic) IBOutlet UIButton *signinButton;
 @property (strong, nonatomic) IBOutlet UIButton *forgotButton;
-
 
 - (IBAction)signinButtonPressed:(id)sender;
 - (IBAction)switchModeButtonPressed:(id)sender;

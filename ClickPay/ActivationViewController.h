@@ -13,6 +13,7 @@
 @property (strong, nonatomic) IBOutlet UIView *bottomView;
 @property (strong, nonatomic) IBOutlet UIButton *activeButton;
 @property (strong, nonatomic) NSString *activationCode;
+@property (strong, nonatomic) NSString *countryCode;
 @property (strong, nonatomic) NSString *phoneNumber;
 
 - (IBAction)activeAccount:(id)sender;

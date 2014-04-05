@@ -7,17 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RESideMenu.h"
 
-@class MenuViewController;
-@protocol menuDelegate <NSObject>
-@required
-- (void)didSelectWith:(MenuViewController *)controller withIdentifier:(NSString *)identifier;
-@end
-
-@interface MenuViewController : UIViewController
-{
-    __weak id<menuDelegate>menuDelegate;
-}
+@interface MenuViewController : UIViewController <RESideMenuDelegate>
 
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIButton *homeButton;
@@ -25,7 +17,5 @@
 @property (strong, nonatomic) IBOutlet UIButton *walletButton;
 
 - (IBAction)buttonPressed:(id)sender;
-
-@property (nonatomic, weak) id<menuDelegate>menuDelegate;
 
 @end
